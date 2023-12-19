@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const Product = require("./models/productModel");
-
+require("dotenv").config();
 const app = express();
 
 app.use(express.json());
@@ -29,19 +29,9 @@ app.listen(3000, () => {
 });
 
 mongoose.set("strictQuery", false);
-/*mongoose
-  .connect(
-    "mongodb+srv://admin:Amazon1209@devwork.qsnwpgi.mongodb.net/Node-API?retryWrites=true&w=majority"
-  )
-  .then(() => {
-    console.log("connected");
-  })
-  .catch((error) => {
-    console.log(error);
-  });*/
 mongoose
   .connect(
-    "mongodb+srv://admin:Amazon1209@devwork.qsnwpgi.mongodb.net/Node-API?retryWrites=true&w=majority"
+    `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@devwork.qsnwpgi.mongodb.net/Node-API?retryWrites=true&w=majority`
   )
   .then(() => {
     console.log("connected");
