@@ -25,19 +25,18 @@ app.post("/product", async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
-
 app.listen(3000, () => {
   console.log("node api is running on the port 3000");
 });
-
 mongoose.set("strictQuery", false);
 mongoose
   .connect(
-    `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_URL}/Node-API?retryWrites=true&w=majority`
+    `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_URL}/${process.env.MONGO_DATABASE}?retryWrites=true&w=majority`
   )
   .then(() => {
     console.log("connected");
   })
   .catch((error) => {
+    console.log("Some Error Happened");
     console.log(error);
   });
