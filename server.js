@@ -1,7 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const Product = require("./models/productModel");
-require("dotenv").config();
+console.log(`**************${process.env.NODE_ENV}**************`);
+require("dotenv").config({ path: `.env.${process.env.NODE_ENV}` });
+//console.log(process.env);
 const app = express();
 
 app.use(express.json());
@@ -31,7 +33,7 @@ app.listen(3000, () => {
 mongoose.set("strictQuery", false);
 mongoose
   .connect(
-    `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@devwork.qsnwpgi.mongodb.net/Node-API?retryWrites=true&w=majority`
+    `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_URL}/Node-API?retryWrites=true&w=majority`
   )
   .then(() => {
     console.log("connected");
